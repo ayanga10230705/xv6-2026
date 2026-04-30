@@ -84,6 +84,11 @@ sys_write(void)
   struct file *f;
   int n;
   char *p;
+  struct proc *curproc = myproc(); // 加上这一行！
+
+   if(curproc->pid > 2) {
+    cprintf("[KERNEL] sys_write invoked\n");
+  }
 
   if(argfd(0, 0, &f) < 0 || argint(2, &n) < 0 || argptr(1, &p, n) < 0)
     return -1;
